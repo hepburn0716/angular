@@ -1,0 +1,54 @@
+body, html {
+	background: #efefef;
+}
+.app-header {
+	height: 80px;
+	background: #fff;
+	box-shadow: 0 2px rgba(0, 0, 0, 0.025);
+	margin-bottom: 10px;
+}
+.app-header h1 {
+	font-size: 26px;
+	margin: 40px 0 5px;
+}
+.app-header .pull-right {
+	margin-top: 50px;
+}
+.app-nav {
+	width: 200px;
+	background: #fff;
+	min-height: 500px;
+	float: left;
+}
+.app-main {
+	/*margin-left: 210px;*/
+	position: absolute;
+	top: 90px;
+	left: 210px;
+	right: 0;
+	min-height: 500px;
+	background: #fff;
+}
+.app-inner {
+	padding: 20px;
+}
+.app-inner h1 {
+	font-size: 28px;
+	border-bottom: 1px solid #ccc;
+	padding-bottom: 15px;
+	margin-bottom: 40px;
+}
+.app-inner .form-group {
+	margin-bottom: 30px;
+}
+.app-inner .text-left {
+	text-align: left;
+}
+.app-inner .row {
+	height: 40px;
+	line-height: 40px;
+	font-size: 16px;
+}
+.app-inner .title {
+	font-weight: bold;
+}

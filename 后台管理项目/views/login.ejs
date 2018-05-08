@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link rel="stylesheet" href="css/bootstrap.css">
+	<style type="text/css">
+	body,html {
+		background:#efefef;
+	}
+	.login {
+		width: 400px;
+		background:#fff;
+		border-radius:10px;
+		position:absolute;
+		left:50%;
+		top:50%;
+		padding:10px;
+		margin:-210px;
+
+	}
+	.login h1 {
+		font-size: 25px;
+		border-bottom: 1px solid #ccc;
+		padding:5px 0 10px;
+	}
+	.login form {
+		margin-top: 20px;
+
+	}
+	.login .form-group {
+		padding: 0 10px;
+	}
+	.login .btn-success {
+		display: block;
+		width: 90%;
+		margin:0 auto;
+	}
+	.login .text-danger {
+		height:20px;
+		overflow: hidden;
+	}
+	</style>
+</head>
+<body>
+	<div ng-app="ickt">
+		<div class="main" ng-controller="main">
+			<div class="login">
+				<h1 class="text-center">请您登录</h1>
+				<!-- 2form表单设置name -->
+				<!-- 绑定事件给表单绑定 -->
+				<form name="login" ng-submit="submitLoginData()" class="form-horizontal">
+					<div class="form-group">
+						<lable for="login_username" class="control-lable col-lg-3">用户名： </lable>
+						<!-- 脏值检测1绑定数据 -->
+						<!-- 3.表单子元素设置name -->
+						<div class="col-lg-9"><input 
+							type="text" 
+							class="form-control"
+							placeholder="请输入用户名"
+							autocomplete="off"
+							ng-model="data.username"
+							name="username"
+							ng-pattern="/^[a-zA-Z].{5,7}$/"
+
+							></div>
+					</div>
+					<div class="form-group">
+						<lable for="login_password" class="control-lable col-lg-3">密 码： </lable>
+						<div class="col-lg-9"><input 
+							type="text" 
+							class="form-control"
+							placeholder="请输入密码"
+							autocomplete="off"
+							ng-model="data.password"
+							name="password"
+							ng-pattern="/[a-zA-Z]+.*\d+|\d+.*[a-zA-Z]+/"
+							></div>
+					</div>
+					<div class="form-group text-danger text-center">
+						<p ng-show="login.username.$dirty && login.username.$invalid">用户名字母开头6-8</p>
+						<p ng-hide="login.password.$pristine || login.password.$valid">密码包含字母和数字</p>
+					</div>
+					<div class="form-group">
+						<button ng-disabled="login.$invalid"class="btn btn-success">登录</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript" src="js/angular.js"></script>
+	<script type="text/javascript">
+	// 获取应用程序
+	angular.module('ickt',[])
+	.controller('main',function($scope,$http) {
+		$scope.submitLoginData = function() {
+			$http
+			// post请求登录首页
+			.post('action/login',$scope.data)
+			// 监听返回的数据
+			.then(function(res) {
+				// console.log(res.data);
+				res = res.data;
+				if(res.errno === 0) {
+					location.href = '/'
+				}else {
+					alert(res.msg);
+				}
+
+			})
+		};
+	});
+
+
+
+	</script>
+</body>
+</html>
